@@ -1,6 +1,6 @@
 import BaseRepository from "./baseRepository.js";
 
-class ProductosRepository extends BaseRepository {
+export class ProductosRepository extends BaseRepository {
   constructor() {
     /** 🗨 Ésta clase hereda de ContenedorBase por lo que puede acceder
      * a todos sus métodos y propiedades.
@@ -9,4 +9,4 @@ class ProductosRepository extends BaseRepository {
   }
 }
 
-export default ProductosRepository;
+

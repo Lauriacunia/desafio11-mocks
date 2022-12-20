@@ -1,5 +1,4 @@
-import ProductosRepository from "../repositories/sql/productosRepository.js";
-const repo = new ProductosRepository();
+import { productosDao as repo } from "../daos/index.js";
 
 /** Los controllers procesan la request que llega y 
  *  formulan la response del endpoint.

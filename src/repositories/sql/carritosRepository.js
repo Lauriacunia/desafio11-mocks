@@ -3,7 +3,7 @@ import knex from "knex";
 import { options } from "../../config/configDB.js";
 const db = knex(options.mysql);
 
-class CarritosRepository extends BaseRepository {
+export class CarritosRepository extends BaseRepository {
   constructor() {
     /** 🗨 Ésta clase hereda de ContenedorBase por lo que puede acceder
      * a todos sus métodos y propiedades.
@@ -54,4 +54,4 @@ class CarritosRepository extends BaseRepository {
   }
 }
 
-export default CarritosRepository;
+
