@@ -1,8 +1,9 @@
-import ContenedorBase from "./contenedorBase.js";
+import BaseRepository from "./baseRepository.js";
 import knex from "knex";
 import { options } from "../../config/configDB.js";
 const db = knex(options.mysql);
-class ContenedorCarritos extends ContenedorBase {
+
+class CarritosRepository extends BaseRepository {
   constructor() {
     /** 🗨 Ésta clase hereda de ContenedorBase por lo que puede acceder
      * a todos sus métodos y propiedades.
@@ -47,19 +48,10 @@ class ContenedorCarritos extends ContenedorBase {
         .join("productos", "carritos_productos.producto_id", "productos.id")
         .select("productos.*");
       return productos;
-             
     } catch (error) {
       return error.message;
     }
   }
-
-
-
 }
 
-    
-
-
-
-
-export default ContenedorCarritos;
+export default CarritosRepository;

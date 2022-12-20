@@ -3,6 +3,7 @@ const router = Router();
 import ContenedorCarritos from "../contenedores/sql/contenedorCarritos.js";
 const contenedor = new ContenedorCarritos();
 
+
 router.get("/", async (req, res) => {
   try {
     const carritos = await contenedor.getAll();

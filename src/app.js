@@ -1,7 +1,7 @@
 import express from "express";
 import http from "http";
 import morgan from "morgan";
-import apiRouter from "./routes/indexRoutes.js";
+import apiRoutes from "./routes/indexRoutes.js";
 import cors from "cors";
 import { Server as ioServer} from "socket.io";
 import chat from "./websocket/chat.js";
@@ -14,7 +14,7 @@ const PORT = 8080 || process.env.PORT;
 /**1- HTTP SERVER */
 const httpServer = http.createServer(app);
 
-/** 2- servidor websocket */
+/** 2- Servidor websocket */
 const io = new ioServer(httpServer, {
   cors: {
     origin: "*",
@@ -23,7 +23,7 @@ const io = new ioServer(httpServer, {
 });
 chat(io);
 
-//** Middlewares */
+//** Middlewares globales de la app */
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -35,10 +35,10 @@ app.use(
 );
 
 
-/** ROUTER */
-app.use("/api", apiRouter);
+/** Routes */
+app.use("/api", apiRoutes);
 
-
+/** Run Server */
 const server = app.listen(PORT, () =>
    console.log(
      `🚀 Server started on port ${PORT}. 
@@ -48,7 +48,7 @@ const server = app.listen(PORT, () =>
 server.on("error", (err) => console.log(err));
 
 function onInit() {
-  console.log("🔥 PRIMERA DB CONEXIÓN - SQL🔥");
+  console.log("🔥 CURSO BACKEND NodeJs - by Laurita Acuña 🔥");
 }
 
 onInit();

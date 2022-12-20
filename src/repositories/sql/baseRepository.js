@@ -2,11 +2,10 @@ import knex from "knex";
 import { options } from "../../config/configDB.js";
 const db = knex(options.mysql);
 
-
-/**🗨 Éstas líneas realizan un CRUD para cualquier entidad 
+/**🗨 Éstas líneas realizan un CRUD para cualquier entidad
  *   reciben el nombre de la tabla a utilizar en su constructor.
-*/
-class ContenedorBase {
+ */
+class BaseRepository {
   constructor(table) {
     this.table = table;
   }
@@ -29,7 +28,9 @@ class ContenedorBase {
   async create(body) {
     try {
       const new_product_id = await db(this.table).insert(body);
-      const new_product = await db(this.table).select("*").where("id", new_product_id);
+      const new_product = await db(this.table)
+        .select("*")
+        .where("id", new_product_id);
       return new_product;
     } catch (error) {
       return error.message;
@@ -47,10 +48,9 @@ class ContenedorBase {
         precio,
         stock,
         timestamp,
-        });
+      });
       const updated_product = this.getOne(id);
       return updated_product;
-
     } catch (error) {
       return error.message;
     }
@@ -72,4 +72,4 @@ class ContenedorBase {
   }
 }
 
-export default ContenedorBase;
+export default BaseRepository;
