@@ -27,30 +27,19 @@ class BaseRepository {
   }
   async create(body) {
     try {
-      const new_product_id = await db(this.table).insert(body);
-      const new_product = await db(this.table)
-        .select("*")
-        .where("id", new_product_id);
-      return new_product;
+      const newItemId = await db(this.table).insert(body);
+      const newItem = await db(this.table).select("*").where("id", newItemId);
+      return newItem;
     } catch (error) {
       return error.message;
     }
   }
+
   async update(id, body) {
     try {
-      const { nombre, descripcion, codigo, foto, precio, stock } = body;
-      const timestamp = new Date();
-      await db(this.table).where("id", id).update({
-        nombre,
-        descripcion,
-        codigo,
-        foto,
-        precio,
-        stock,
-        timestamp,
-      });
-      const updated_product = this.getOne(id);
-      return updated_product;
+      await db(this.table).where("id", id).update(body);
+      const updatedItem = this.getOne(id);
+      return updatedItem;
     } catch (error) {
       return error.message;
     }
@@ -60,8 +49,8 @@ class BaseRepository {
       /**🗨 Revisar en la documentación que retorna cada query
        * Aqui retorna '0' si no se borra nada y '1' si se borra algo
        */
-      const productoBorrado = await db(this.table).where("id", id).del();
-      if (productoBorrado > 0) {
+      const deletedItem = await db(this.table).where("id", id).del();
+      if (deletedItem > 0) {
         return true;
       } else {
         return false;

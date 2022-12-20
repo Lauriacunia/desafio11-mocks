@@ -3,6 +3,9 @@ dotenv.config();
 let productosDao;
 let carritosDao;
 
+/** 🗨  Según la variable de entorno
+ * setea el repositorio a utilizar
+ */
 
 switch (process.env.DB_CONNECTION) {
   case "mysql":
@@ -13,13 +16,17 @@ switch (process.env.DB_CONNECTION) {
     import("../repositories/sql/carritosRepository.js").then(({ CarritosRepository }) => {
         carritosDao = new CarritosRepository();
     });
-//   case "mongoDB":
-//     import("./productos/MongoDBProductos.js").then(({ MongoDBProductos }) => {
-//       productosDao = new MongoDBProductos();
-//     });
-//     import("./carritos/MongoDBCarritos.js").then(({ MongoDBCarritos }) => {
-//       carritosDao = new MongoDBCarritos();
-//     });
+  case "mongoDB":
+    import("../repositories/mongoDb/mongoProductosRepository.js").then(
+      ({ MongoProductosRepository }) => {
+        productosDao = new MongoProductosRepository();
+      }
+    );
+    import("../repositories/mongoDb/mongoCarritosRepository.js").then(
+      ({ MongoCarritosRepository }) => {
+        carritosDao = new MongoCarritosRepository();
+      }
+    );
     break;
 
   default:

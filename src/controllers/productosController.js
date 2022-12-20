@@ -1,6 +1,6 @@
 import { productosDao as repo } from "../daos/index.js";
 
-/** Los controllers procesan la request que llega y 
+/** 🗨 Los controllers procesan la request que llega y 
  *  formulan la response del endpoint.
  *  Pueden contener lógica de negocio, validaciones, etc.
  *  O pueden delegar esa responsabilidad a los services.
