@@ -55,6 +55,7 @@ function createMensajes(n){
         avatar: faker.internet.avatar(),
       },
       text: faker.lorem.sentences(2),
+      timestamp: faker.date.past(),
     });
   }
   return mensajes;

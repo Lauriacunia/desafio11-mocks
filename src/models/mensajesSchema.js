@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 export const mensajesSchema = new mongoose.Schema({
 
-    author: {
+    autor: {
             id: {
                 type: String,
                 required: true,
@@ -23,8 +23,12 @@ export const mensajesSchema = new mongoose.Schema({
                 type: String
             },
         },
-    text: {
+    texto: {
         type: String,
+        required: true,
+    },
+    timestamp: {
+        type: Date,
         required: true,
     },
 });

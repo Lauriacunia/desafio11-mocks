@@ -1,13 +1,17 @@
-const mensajes = [];
+import { MongoMensajesRepository } from "../repositories/mongoDb/mongoMensajesRepository.js";
+const repoMensajes = new MongoMensajesRepository();
 
 /**🗨 Recibe una instancia del servidor websocket 'io'*/
 
 export default (io) => {
-  // Nuevo servidor para el chat
   io.on("connection", (socket) => {
-    // el socket trae toda la data del cliente
     console.log("New user connected. Soquet ID : ", socket.id);
-
+    /** Cargo los mensajes persistidos hasta el momento */
+    repoMensajes.getAll().then((messages) => {
+      console.log("allMessages", messages);
+      socket.emit("all-messages", messages);
+      socket.broadcast.emit("all-messages", messages);
+    });
     /** on para escuchar
      *  emit para enviar
      */
@@ -20,12 +24,13 @@ export default (io) => {
     /** El servidor recibe los nuevos mensajes y los re-envia los */
     socket.on("new-message", (message) => {
       console.log("New Message", message);
-      // chat.mensajes.push(message);
-      // const chatNormalized =  normalizeChat(chat);
-      // print(chatNormalized);
-      mensajes.push(message);
-      socket.emit("all-messages", mensajes);
-      socket.broadcast.emit("all-messages", mensajes);
+      repoMensajes.create(message);
+     // getAll retorna una promesa. Cuando se resuelva, se ejecuta el then
+      repoMensajes.getAll().then((messages) => {
+        console.log("allMessages", messages);
+        socket.emit("all-messages", messages);
+        socket.broadcast.emit("all-messages", messages);
+      });
     });
 
     // socket.emit('messages', messages);
