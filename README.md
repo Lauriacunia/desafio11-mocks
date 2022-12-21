@@ -1,4 +1,4 @@
-# ECOMMERCE CODERHOUSE - 1ERA ENTREGA DEL TP FINAL
+# ECOMMERCE CODERHOUSE 
 ## 👩‍💻 Tutora: Laura Acuña
 ## Documentación
   📝 [Documentación en Postman](https://documenter.getpostman.com/view/13362314/UzBqnjhu)
