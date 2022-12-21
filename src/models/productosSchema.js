@@ -9,12 +9,10 @@ export const productosSchema = new mongoose.Schema({
     type: String,
   },
   codigo: {
-    type: String,
-    required: true,
+    type: String
   },
-  thumbnail: {
-    type: String,
-    required: true,
+  foto: {
+    type: String
   },
   precio: {
     type: Number,

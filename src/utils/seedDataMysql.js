@@ -1,4 +1,4 @@
-import { options } from './configDB.js';
+import { options } from '../config/configDB.js';
 import knex from 'knex';
 
 const productos = [

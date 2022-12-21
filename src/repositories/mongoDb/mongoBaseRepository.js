@@ -24,11 +24,22 @@ export default class MongoBaseRepository {
   }
 
   async create(doc) {
-    console.log(doc);
+    //console.log(doc);
     try {
       const newDoc = await this.collection.create(doc);
       return newDoc;
     } catch (err) {
+      throw new Error(err);
+    }
+  }
+
+  async saveMany(docs) {
+    try {
+      //console.log('saving many docs...')
+      const newDocs = await this.collection.insertMany(docs);
+      return newDocs;
+    } catch (err) {
+      console.log(err)
       throw new Error(err);
     }
   }
